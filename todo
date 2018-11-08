@@ -1,0 +1,20 @@
+# VSCode Todo+ extension
+Terraform:
+    ✔ Variable for user name @done(18-11-07 16:36)
+    ✔ Variable for location @done(18-11-07 16:36)
+    ✔ Variable for Azure credentials? @done(18-11-07 17:24)
+    ☐ Generate SSH key pair
+    ✔ Input SSH public key to VM creation @done(18-11-07 17:25)
+    ✔ Find correct VM size @done(18-11-07 16:58)
+    ✔ DNS Name @done(18-11-07 16:47)
+    ☐ Write usage documentation
+    ✔ Create all security rules for hosting Ark @done(18-11-07 17:25)
+    ☐ Test if base terraform run works
+
+Ansible:
+    ☐ Install Docker
+    ☐ Add Ark user to Docker group
+    ☐ Run Ark Docker compose file
+
+Docker:
+    ☐ Dockerfile to run Terraform / Ansible
