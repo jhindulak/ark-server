@@ -1,0 +1,15 @@
+---
+  - name: Create Ark server container
+    docker_container:
+      name: ark
+      image: jasonhindulak/ark-server:0.1.0-ubuntu-16.04
+      state: present
+      ports:
+       - "7778:7778"
+       - "7778:7778/udp"
+       - "27015:27015"
+       - "27015:27015/udp"
+       - "32330:32330"
+       - "27020:27020"
+      env:
+        SESSIONNAME: "{{ ark_session_name }}"
