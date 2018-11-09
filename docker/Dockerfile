@@ -1,8 +1,7 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
-MAINTAINER 'Jason Hindulak'
+LABEL Author="Jason Hindulak"
 
-# Var for first config
 # Server Name
 ENV SESSIONNAME "Ark Docker"
 # Map name
@@ -11,7 +10,7 @@ ENV SERVERMAP "Extinction"
 ENV SERVERPASSWORD ""
 # Admin password
 ENV ADMINPASSWORD "adminpassword"
-# Nb Players
+# Number of Players
 ENV NBPLAYERS 70
 # If the server is updating when start with docker start
 ENV UPDATEONSTART 1
@@ -57,10 +56,10 @@ COPY user.sh /home/steam/user.sh
 COPY crontab /home/steam/crontab
 COPY arkmanager-user.cfg /home/steam/arkmanager.cfg
 
-RUN touch /root/.bash_profile
-RUN chmod 777 /home/steam/run.sh
-RUN chmod 777 /home/steam/user.sh
-RUN mkdir  /ark
+RUN touch /root/.bash_profile && \
+	chmod 777 /home/steam/run.sh && \
+	chmod 777 /home/steam/user.sh && \
+	mkdir  /ark
 
 # We use the git method, because api github has a limit ;)
 RUN  git clone https://github.com/FezVrasta/ark-server-tools.git /home/steam/ark-server-tools
@@ -68,8 +67,8 @@ WORKDIR /home/steam/ark-server-tools/
 RUN  git checkout $GIT_TAG 
 # Install 
 WORKDIR /home/steam/ark-server-tools/tools
-RUN chmod +x install.sh 
-RUN ./install.sh steam 
+RUN chmod +x install.sh && \
+	./install.sh steam 
 
 # Allow crontab to call arkmanager
 RUN ln -s /usr/local/bin/arkmanager /usr/bin/arkmanager
@@ -88,7 +87,6 @@ RUN mkdir /home/steam/steamcmd && \
 	curl http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz
 
 EXPOSE ${STEAMPORT} 32330 ${SERVERPORT}
-# Add UDP
 EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
 
 VOLUME  /ark 

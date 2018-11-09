@@ -10,12 +10,6 @@ variable "domain_name_label" {
 }
 
 # Optional variables
-variable "vm_username" {
-  type = "string"
-  default = "arkuser"
-  description = "Username to be set in the Azure VM and .ssh profile location."
-}
-
 variable "resource_location" {
   type = "string"
   default = "eastus"

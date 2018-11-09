@@ -1,0 +1,41 @@
+---
+  - name: Create ark_config directory
+    file:
+      path: /ark_config
+      state: directory
+
+  - name: Copy Arkmanager system config
+    copy:
+      src: arkmanager-system.cfg
+      dest: /ark_config/arkmanager-system.cfg
+
+  - name: Copy Arkmanager user config
+    copy:
+      src: arkmanager-user.cfg
+      dest: /ark_config/arkmanager-user.cfg
+
+  - name: Copy Arkmanager instance config
+    copy:
+      src: instance.cfg
+      dest: /ark_config/instance.cfg
+
+  - name: Create Ark server container
+    docker_container:
+      name: ark
+      image: jasonhindulak/ark-server:0.1.0-ubuntu-16.04
+      state: present
+      ports:
+       - "7778:7778"
+       - "7778:7778/udp"
+       - "27015:27015"
+       - "27015:27015/udp"
+       - "32330:32330"
+       - "27020:27020"
+      env:
+        SESSIONNAME: "{{ ark_session_name }}"
+        SERVERPASSWORD: "{{ ark_server_password }}"
+        ADMINPASSWORD: "{{ ark_admin_password }}"
+        NBPLAYERS: "{{ ark_number_players }}"
+        SERVERMAP: "{{ ark_server_map }}"
+      volumes:
+        - /ark_config:/ark

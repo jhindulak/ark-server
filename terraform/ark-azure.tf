@@ -175,13 +175,13 @@ resource "azurerm_virtual_machine" "ark_vm" {
 
     os_profile {
         computer_name = "ark_vm"
-        admin_username = "${var.vm_username}"
+        admin_username = "arkuser"
     }
 
     os_profile_linux_config {
         disable_password_authentication = true
         ssh_keys {
-            path     = "/home/${var.vm_username}/.ssh/authorized_keys"
+            path     = "/home/arkuser/.ssh/authorized_keys"
             key_data = "${var.ssh_public_key}"
         }
     }

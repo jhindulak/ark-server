@@ -21,8 +21,6 @@ function stop {
 	exit
 }
 
-
-
 # Change working directory to /ark to allow relative path
 cd /ark
 
@@ -40,8 +38,6 @@ cp /home/steam/crontab /ark/template/crontab
 [ ! -L /ark/GameUserSettings.ini ] && ln -s server/ShooterGame/Saved/Config/LinuxServer/GameUserSettings.ini GameUserSettings.ini
 [ ! -f /ark/crontab ] && cp /ark/template/crontab /ark/crontab
 
-
-
 if [ ! -d /ark/server  ] || [ ! -f /ark/server/arkversion ];then 
 	echo "No game files found. Installing..."
 	mkdir -p /ark/server/ShooterGame/Saved/SavedArks
@@ -50,7 +46,6 @@ if [ ! -d /ark/server  ] || [ ! -f /ark/server/arkversion ];then
 	touch /ark/server/ShooterGame/Binaries/Linux/ShooterGameServer
 	arkmanager install
 	echo "Arkmanager install complete."
-	# Create mod dir
 else
 
 	if [ ${BACKUPONSTART} -eq 1 ] && [ "$(ls -A server/ShooterGame/Saved/SavedArks/)" ]; then 
@@ -58,7 +53,6 @@ else
 		arkmanager backup
 	fi
 fi
-
 
 # If there is uncommented line in the file
 CRONNUMBER=`grep -v "^#" /ark/crontab | wc -l`
@@ -78,7 +72,6 @@ if [ $UPDATEONSTART -eq 0 ]; then
 else
 	arkmanager start
 fi
-
 
 # Stop server in case of signal INT or TERM
 echo "Waiting..."

@@ -2,8 +2,6 @@
 - name: Install Docker and run Ark container
   gather_facts: false
   hosts: all
-  become: yes
-  become_method: sudo
   roles:
     - docker
     - ark-docker
@@ -12,4 +10,3 @@
     - ark
     - docker
     - ark-server
-    - azure
