@@ -14,10 +14,6 @@ read -p "Domain name label: " -r TF_VAR_domain_name_label
 
 # Do validation on these, if not empty/null save as TF_ENV
 echo "The following items are optional. Hit the enter key without entry to accept the default for an item."
-read -p "VM username (default: arkuser): " -r vm_username
-if [ -n "$vm_username"];
-    TF_VAR_vm_username = vm_username
-fi
 read -p "Resource location (default: eastus): " -r resource_location
 if [ -n "$resource_location"];
     TF_VAR_resource_location = resource_location
